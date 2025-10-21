@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+
+    <style>
+      :root {
+        --accent-color: #05a081;
+        --accent-color-light: #82d0c0;
+        --accent-overlay-color: #fff;
+        --body-bg: #fff;
+        --body-color: #000;
+        --heading-color: #000;
+        --table-bg-even: #f3f3f3;
+        --table-border-bottom: #dddddd;
+      }
+      
+    </style>
+
+    <meta name="theme-color" content="#05a081" />
+
+    
+      <link rel="icon" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.b722df128754d46d.png" />
+      <link rel="apple-touch-icon" sizes="48x48" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.b722df128754d46d.png" />
+      <link rel="apple-touch-icon" sizes="72x72" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.6cc6de892c65b543.png" />
+      <link rel="apple-touch-icon" sizes="96x96" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.05bb94ecb36c25eb.png" />
+      <link rel="apple-touch-icon" sizes="144x144" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.f51b5e0bcc4516db.png" />
+      <link rel="apple-touch-icon" sizes="192x192" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.eae6a2274aff6419.png" />
+      <link rel="apple-touch-icon" sizes="256x256" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.2e54fa9ad4d11bdb.png" />
+      <link rel="apple-touch-icon" sizes="384x384" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.809ea1a0e3c3f3e0.png" />
+      <link rel="apple-touch-icon" sizes="512x512" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.7c64c06f3e2d7a67.png" />
+      
+    
+
+    
+
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary">
+
+    
+
+    
+
+    
+      
+        <meta name="description" content="" />
+        <meta name="twitter:description" content="">
+      
+    
+
+    
+      <meta name="twitter:title" content="Architecture Note: Use Cases in Android">
+    
+
+    
+      <link rel="prerender" href="&#x2F;blog&#x2F;" />
+    
+
+    <link rel="prefetch" href="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.9401710308142458.png" />
+
+    <title>
+      
+        
+          Architecture Note: Use Cases in Android
+        
+      
+    </title>
+
+    
+    
+      <link rel="stylesheet" href="https://flavius.dev/main.css">
+    
+    
+
+
+
+
+
+<link rel="prerender" href="https://flavius.dev/tags/android/">
+
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://google.com/article"
+      },
+      "headline": "Architecture Note: Use Cases in Android",
+      "image": [],
+      "datePublished": "2025-08-24T00:00:00+00:00",
+      "dateModified": "2025-08-24T00:00:00+00:00"
+    }
+  </script>
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        
+
+        
+        {
+          
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Flavius&#x27; development journal",
+          "item": "https://flavius.dev/"
+        },
+        
+        {
+          
+          "@type": "ListItem",
+          "position": 2,
+          "name": "",
+          "item": "https://flavius.dev/blog/"
+        },
+        
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Architecture Note: Use Cases in Android",
+          "item": "https://flavius.dev/blog/architecture-use-cases/"
+        }
+      ]
+    }
+  </script>
+
+  </head>
+  <body>
+    
+      <header>
+        <a class="profile-icon" href="/">
+          <img src="https:&#x2F;&#x2F;flavius.dev&#x2F;processed_images&#x2F;icon.9401710308142458.png" alt="profile picture">
+        </a>
+<!--        <nav>-->
+<!--          -->
+<!--            <a href="&#x2F;blog&#x2F;">Blog</a>-->
+<!--          -->
+<!--        </nav>-->
+      </header>
+    
+    <main>
+    
+<div class="post-title">
+  <h1>Architecture Note: Use Cases in Android</h1>
+  <small>
+    August 24, 2025
+    
+    -
+    <span class="tags">
+      
+      <a href="https://flavius.dev/tags/android/">android</a>
+      
+    </span>
+    
+  </small>
+</div>
+
+<div>
+  <p>A layered architecture separates business logic from UI logic, delineating <em>what</em> the app should do from <em>how</em> it should do it.</p>
+<p>The <em>data</em> layer contains the majority of app business logic, which provides the unique value and key differentiators for your app – it is the implementation of product requirements for your application's data.</p>
+<p>The <em>presentation</em> layer consists of UI elements and UI state. The latter is derived from data models, or entities, provided by the data layer. Sometimes, additional business logic is needed in order to determine what state the system should be in.</p>
+<p>What is the optional <em>domain</em> layer then, and what purpose does it serve in a layered app architecture?</p>
+<img src="/img/2025-08-24-android-architecture-use-cases.webp" />
+<h4 id="viewmodel-vs-usecase">ViewModel vs UseCase</h4>
+<p>A ViewModel provides access to the business logic, and produces a state stream consumed by UI logic (where further transformations occur alongside platform-specific implementation details such as the Android <code>Context</code> and <code>Resources</code>). The state can change because of upstream events, like a network response updating the application's data, or the user performing an action that would create or modify that data in some meaningful way as modeled by the product requirements.</p>
+<p>Although typically each ViewModel is associated with a single app screen, sometimes the ViewModel class can still grow and become harder to manage and test. The business logic can then be extracted in <code>UseCase</code> classes, and that can be especially helpful in two situations:</p>
+<ol>
+<li>You want to re-use a piece of simple logic.
+For example, if multiple ViewModels perform the same type of user input validation, or access a common resource such as a user preference, those ViewModels can inject the common use case as a dependency.</li>
+<li>You want to extract complex logic out of the ViewModel.
+For example, if a user flow requires a complex orchestration of multiple data components to process a new UI event or input, this logic can be better managed and tested in isolation if it is in its own UseCase class.</li>
+</ol>
+<h4 id="usecase-vs-repository">UseCase vs Repository</h4>
+<p>Sometimes, additional data processing on the app side is necessary, especially when the app's "backend" (e.g., a cloud service, a different embedded device, etc.) does not or should not implement a certain requirement. This moves the responsibility to one of the app's components.</p>
+<p>If this happens, consider whether that data processing logic belongs in a data layer component first, such as a <em>repository</em> or one of its <em>data source</em> dependencies.</p>
+<p>Use cases focus less on data transformations and more on <em>what</em> the app should do in a given system state. Ideally, their logic operates on <em>domain entity</em> objects which allow the decoupling of app logic from any particular backend implementation.</p>
+<h4 id="naming">Naming</h4>
+<p>Use the scheme <em>verb + noun (what) + UseCase</em>, e.g. <code>FormatInputUseCase</code> , or <code>GetPostHistoryWithAuthorsUseCase</code>.</p>
+<h4 id="a-mars-example">A Mars Example</h4>
+<p>Let's <em>imagine</em> a playful scenario in which a scientist, located inside a Martian base, uses an Android device to command and control a fleet of autonomous rovers. These can be deployed anywhere on the planet's surface to perform specific analyses on various environmental samples.</p>
+<p>Suppose the operator selected a region, and would like to plan a mission to determine the feasibility of a base expansion in that area.</p>
+<p>A complex use case such as this one may require combining different elements in order to perform the task:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>class PlanBaseExpansionUseCase(
+</span><span>   roverRepository: RoverRepository,
+</span><span>   missionRepository: MissionRepository,
+</span><span>   validateCoordinateUseCase: ValidateCoordinateUseCase,
+</span><span>   makeRegionUseCase: MakeRegionUseCase,
+</span><span>) {
+</span><span>   operator fun invoke(vararg coordinates: Pair&lt;Float, Float&gt;): Flow&lt;MissionPlanResult&gt; {
+</span><span>      // validate the provided coordinates, create a region
+</span><span>      // fetch active rovers compatible with the mission type
+</span><span>      // create mission assignments
+</span><span>      // report live plan feasibility (e.g. success/failure enum or sealed types) back to the UI
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<p>The use case may depend on data layer components as seen above – one or more repositories. To make it easier to test, interfaces can be used:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>interface RoverRepository {
+</span><span>   suspend fun getAllRoversByCapability(capabilities: Set&lt;RoverCapability&gt;): Flow&lt;List&lt;Rover&gt;&gt;
+</span><span>}
+</span><span>
+</span><span>class DefaultRoverRepository : RoverRepository { ... }
+</span></code></pre>
+<p>The main class implementation leverages a planetary network service to produce a state list of online rovers with the given capability.</p>
+<p>In the test, the interface allows injecting a <em>fake</em>. For example, <code>FakeRoverRepository</code> returns a list of rovers compatible with the base expansion mission, but some of them may be running out of battery which would influence the probability of mission success. Fakes allow capturing a variety of stateful behaviors, and decouple the use case code, e.g. from specific network or database implementations.</p>
+<h4 id="use-case-recommendations">Use Case recommendations</h4>
+<ul>
+<li>do name your use case as a verb or function-like name</li>
+<li>do expose a single public member, e.g. allows callers to use the <code>invoke</code> operator function <code>planBaseExpansionUseCase(coordinates)</code></li>
+<li>do make your executor function main-safe (the use case is responsible for managing its <em>concurrency policy</em> by switching to the appropriate thread to do the work)</li>
+<li>don't add multiple responsibilities to the same use-case, instead create separate use cases (e.g. <code>ExecuteMissionUseCase</code>)</li>
+<li>do depend on interfaces in the use case constructor, instead of concrete implementations</li>
+<li>do return primitive types or domain/data entities from the use case</li>
+<li>don't make the use case dependent on any platform-specific classes (e.g. don't import anything <code>android.*</code>)</li>
+<li>do create a use case for simple business logic that is re-used a lot, or for complex logic making viewModels harder to maintain</li>
+<li>consider whether your business logic could more easily be kept in the data layer instead of creating a use case, unless you have a specific need to route everything through the domain layer, perhaps using a framework</li>
+</ul>
+<p>Ultimately, use the pattern that most easily helps you implement your application's product requirements and produce value to customers. By separating component responsibilities and promoting testability, issues are easier to isolate and analyze, while you can maintain a high-quality, robust codebase, which scales quickly with the influx of new product requirements.</p>
+
+</div>
+
+<hr class="footer-rule" />
+
+
+<div class="footer-about">
+  
+</div>
+
+
+<div class="related-container">
+
+  
+
+  
+
+</div>
+
+
+    </main>
+    <footer class="footer-page">
+    
+      
+    
+    </footer>
+  </body>
+</html>

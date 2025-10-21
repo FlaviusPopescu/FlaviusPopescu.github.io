@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://flavius.dev/</loc>
+    </url>
+    <url>
+        <loc>https://flavius.dev/about/</loc>
+    </url>
+    <url>
+        <loc>https://flavius.dev/blog/</loc>
+    </url>
+    <url>
+        <loc>https://flavius.dev/blog/architecture-use-cases/</loc>
+        <lastmod>2025-08-24</lastmod>
+    </url>
+    <url>
+        <loc>https://flavius.dev/tags/</loc>
+    </url>
+    <url>
+        <loc>https://flavius.dev/tags/android/</loc>
+    </url>
+</urlset>
