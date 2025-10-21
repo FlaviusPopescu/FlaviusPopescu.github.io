@@ -1,17 +1,16 @@
 +++
-title = "Architecture Note: Use Cases in Modern Android"
+title = "Architecture Note: Use Cases in Android"
 [taxonomies]
 tags = [ "android" ]
 +++
 
-In a layered app architecture there are two types of logic, separating _what_ the app should do from _how_ it should do it.
+A layered architecture separates business logic from UI logic, delineating _what_ the app should do from _how_ it should do it.
 
-The data layer contains the majority of the app's business logic, which provides the unique value and key differentiators for your app – it is the implementation of the product requirements for your application's data.
+The _data_ layer contains the majority of app business logic, which provides the unique value and key differentiators for your app – it is the implementation of product requirements for your application's data.
 
-The UI layer (_presentation_), consists of UI elements and UI state. The latter is derived from data entities provided by the data layer, _after_ any application business logic has been applied to it.
+The _presentation_ layer consists of UI elements and UI state. The latter is derived from data models, or entities, provided by the data layer. Sometimes, additional business logic is needed in order to determine what state the system should be in.
 
-What is the optional _domain_ layer then, and what purpose does it serve in a modern app architecture?
-
+What is the optional _domain_ layer then, and what purpose does it serve in a layered app architecture?
 
 <img src="/img/2025-08-24-android-architecture-use-cases.webp" />
 
@@ -19,11 +18,19 @@ What is the optional _domain_ layer then, and what purpose does it serve in a mo
 
 A ViewModel provides access to the business logic, and produces a state stream consumed by UI logic (where further transformations occur alongside platform-specific implementation details such as the Android `Context` and `Resources`). The state can change because of upstream events, like a network response updating the application's data, or the user performing an action that would create or modify that data in some meaningful way as modeled by the product requirements. 
 
-Although typically each ViewModel is associated with a single app screen, sometimes the ViewModel class can still grow and become harder to manage or even test. The business logic can then be extracted in `UseCase` classes, and that can be especially helpful in two situations:
+Although typically each ViewModel is associated with a single app screen, sometimes the ViewModel class can still grow and become harder to manage and test. The business logic can then be extracted in `UseCase` classes, and that can be especially helpful in two situations:
 1. You want to re-use a piece of simple logic.
    For example, if multiple ViewModels perform the same type of user input validation, or access a common resource such as a user preference, those ViewModels can inject the common use case as a dependency.
 2. You want to extract complex logic out of the ViewModel.
    For example, if a user flow requires a complex orchestration of multiple data components to process a new UI event or input, this logic can be better managed and tested in isolation if it is in its own UseCase class.
+
+#### UseCase vs Repository
+
+Sometimes, additional data processing on the app side is necessary, especially when the app's "backend" (e.g., a cloud service, a different embedded device, etc.) does not or should not implement a certain requirement. This moves the responsibility to one of the app's components.
+
+If this happens, consider whether that data processing logic belongs in a data layer component first, such as a _repository_ or one of its _data source_ dependencies.
+
+Use cases focus less on data transformations and more on _what_ the app should do in a given system state. Ideally, their logic operates on _domain entity_ objects which allow the decoupling of app logic from any particular backend implementation.
 
 #### Naming
 Use the scheme _verb + noun (what) + UseCase_, e.g. `FormatInputUseCase` , or `GetPostHistoryWithAuthorsUseCase`.
@@ -51,7 +58,7 @@ class PlanBaseExpansionUseCase(
 }
 ```
 
-The use case may depend on data layer components as seen above – one or more repositories. To make it easier to test, interfaces should be used:
+The use case may depend on data layer components as seen above – one or more repositories. To make it easier to test, interfaces can be used:
 
 ```
 interface RoverRepository {
@@ -64,6 +71,7 @@ class DefaultRoverRepository : RoverRepository { ... }
 The main class implementation leverages a planetary network service to produce a state list of online rovers with the given capability.
 
 In the test, the interface allows injecting a _fake_. For example, `FakeRoverRepository` returns a list of rovers compatible with the base expansion mission, but some of them may be running out of battery which would influence the probability of mission success. Fakes allow capturing a variety of stateful behaviors, and decouple the use case code, e.g. from specific network or database implementations.
+
 #### Use Case recommendations
 - do name your use case as a verb or function-like name
 - do expose a single public member, e.g. allows callers to use the `invoke` operator function `planBaseExpansionUseCase(coordinates)`
